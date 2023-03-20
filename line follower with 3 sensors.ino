@@ -1,31 +1,32 @@
 // This code is uses only 3 sensors.
 // Best for simple line follower robots(can't solve mazes)
 
-//Motor one
+//right motor
 #define ENA 11
-#define IN1 10
-#define IN2 9
+#define IN1 10     // +ve  right
+#define IN2 9      // -ve right
 
-//Motor two
-#define IN3 8
-#define IN4 7
+//left motor
+#define IN3 8   // +ve left
+#define IN4 7   // -ve right
 #define ENB 6
 
 int sensor1 = 2;      // Left most sensor
 int sensor2 =3;       // mid sensor
 //int sensor3 = 5;      // right sensor
 
-int speed_left = 100;
+int speed_left = 100;                      // changing the values will change the speed of the motors
 int speed_right = 100;
 
-int sensor[5] = {0,0,0};
+int sensor[3] = {0,0,0};
+
+// functions 
 void forward();
 void Stop();
 void sharpleft();
 void sharpright();
 void left();
 void right();
-void deadend();
 
 void setup() {
   //Sensor pins
@@ -82,7 +83,7 @@ void forward() {
   digitalWrite(IN2, LOW);
 }
 void sharpright() {
-  analogWrite(ENA, 250);
+  analogWrite(ENA, 250);       
   analogWrite(ENB, 250);
   digitalWrite(IN2, HIGH);
   digitalWrite(IN1, LOW);
@@ -121,11 +122,4 @@ void right(){
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
 }
-void deadend(){
-  analogWrite(ENA, 130);
-  analogWrite(ENB, 130);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN4, LOW);
-  digitalWrite(IN3, HIGH); 
 }
